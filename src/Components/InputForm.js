@@ -143,7 +143,8 @@ const InputForm = (props) => {
         >
           <label>Newsletter Template</label>
           <br />
-          <label>Template</label>
+          <br />
+
           {/* <div>
         <input
           type="text"
@@ -165,7 +166,6 @@ const InputForm = (props) => {
                 checked={nlURLS.template === "ATN"}
                 onChange={handleInputChange}
               />
-              <br />
               OTR
               <input
                 class="form-check-input"
@@ -176,7 +176,6 @@ const InputForm = (props) => {
                 checked={nlURLS.template === "OTR"}
                 onChange={handleInputChange}
               />
-              <br />
               PTR
               <input
                 class="form-check-input"
@@ -187,7 +186,6 @@ const InputForm = (props) => {
                 checked={nlURLS.template === "PTR"}
                 onChange={handleInputChange}
               />
-              <br />
               TCI
               <input
                 class="form-check-input"
@@ -198,7 +196,6 @@ const InputForm = (props) => {
                 checked={nlURLS.template === "TCI"}
                 onChange={handleInputChange}
               />
-              <br />
               WIA
               <input
                 class="form-check-input"
@@ -212,7 +209,6 @@ const InputForm = (props) => {
             </div>
           </div>
 
-          <br />
           <div class="mb-3">
             <label class="form-label">Article 1</label>
             <input
@@ -223,7 +219,6 @@ const InputForm = (props) => {
               onChange={handleInputChange}
             />
           </div>
-          <br />
 
           <div class="mb-3">
             <label class="form-label">Article 2</label>
@@ -235,7 +230,6 @@ const InputForm = (props) => {
               onChange={handleInputChange}
             />
           </div>
-          <br />
 
           <div class="mb-3">
             <label class="form-label">Article 3</label>
@@ -247,11 +241,10 @@ const InputForm = (props) => {
               onChange={handleInputChange}
             />
           </div>
-          <br />
 
           <div class="mb-3">
             <label class="form-label">Ad 1</label>
-            <input
+            <textarea
               class="form-control form-control-sm"
               // type="text"
               name="ad1Input"
@@ -259,11 +252,10 @@ const InputForm = (props) => {
               onChange={handleInputChange}
             />
           </div>
-          <br />
 
           <div class="mb-3">
             <label class="form-label">Ad 2</label>
-            <input
+            <textarea
               class="form-control form-control-sm"
               // type="text"
               name="ad2Input"
@@ -271,11 +263,10 @@ const InputForm = (props) => {
               onChange={handleInputChange}
             />
           </div>
-          <br />
 
           <div class="mb-3">
             <label class="form-label">Ad 3</label>
-            <input
+            <textarea
               class="form-control form-control-sm"
               // type="text"
               name="ad3Input"
@@ -283,8 +274,10 @@ const InputForm = (props) => {
               onChange={handleInputChange}
             />
           </div>
-          <br />
-          <input type="submit" value="submit" />
+
+          <div class="d-grid gap-2">
+            <input class="btn btn-success" type="submit" value="Save" />
+          </div>
           {/* <button class="c-form-btn">Refresh</button> */}
         </form>
       </div>

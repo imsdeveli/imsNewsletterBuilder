@@ -4,8 +4,8 @@ import OTR from "../Templates/OTR.js";
 import PTR from "../Templates/PTR.js";
 import TCI from "../Templates/TCI.js";
 import WIA from "../Templates/WIA.js";
-
-// import "../styles.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "../scrollBox.css";
 
 import Preview from "./Preview";
 
@@ -15,11 +15,7 @@ const Display = (props) => {
   let template = props.state.template;
 
   const Blank = () => {
-    return (
-      <div>
-        <h1>Please enter a valid Template</h1>
-      </div>
-    );
+    return `Please enter a valid template`;
   };
 
   let templateString = Blank;
@@ -55,16 +51,37 @@ const Display = (props) => {
     navigator.clipboard.writeText(input);
 
     alert("Copied Text: " + input);
+    // console.log("TemplateString:", templateString);
   }
 
-  // console.log("TemplateString:", templateString);
   return (
     <div className="Display">
       <div class="row">
-        <div class="col">
-          <div>{props.state.template}</div>
-          <div id="copyMe">{templateString}</div>
-          <button onClick={handleCopyClick}> Copy HTML to clipboard </button>
+        <div class="col-6">
+          <div class="d-grid gap-2 mb-4">
+            <h2>HTML</h2>
+            <p class="small">
+              Once you've completed the form and saved, use the button below to
+              generate your HTML. Each time you make changes to the form you'll
+              need to re-generate HTML.
+            </p>
+            <button class="btn btn-success" onClick={props.pullData}>
+              Generate HTML
+            </button>
+          </div>
+          <div class="card mb-4 scroll-box">
+            <p class="card-text small" style={{ fontSize: "10px" }}>
+              <span>
+                <pre>{templateString}</pre>
+              </span>
+            </p>
+          </div>
+          <div class="d-grid gap-2 mb-4">
+            <button class="btn btn-link" onClick={handleCopyClick}>
+              {" "}
+              Copy HTML to clipboard{" "}
+            </button>
+          </div>
         </div>
         <div class="col">
           <Preview templateString={templateString} />

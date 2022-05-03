@@ -572,7 +572,7 @@ export default function App() {
   return (
     <div class="App">
       <div class="container-fluid ">
-        <div class="row">
+        <div class="row" style={{ "background-color": "#000000" }}>
           {" "}
           <div>
             <img
@@ -584,13 +584,19 @@ export default function App() {
       </div>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-2">
-            <h2>IMS Newsletter Builder</h2>
+          <div class="col-3">
+            <h2>Newsletter Builder</h2>
+            <p class="small">
+              First select the email template you'd like to use, and then fill
+              in each respective field. For articles, input the full article
+              URL. For advertisements, insert the code snippet given by
+              HasOffers
+            </p>
             <InputForm addData={addData} pullData={pullData} />
           </div>
-          <div class="col-10">
-            <button onClick={pullData}> Fill out HTML</button>
+          <div class="col-9">
             <Display
+              pullData={pullData}
               state={state}
               ar1={ar1}
               ar2={ar2}

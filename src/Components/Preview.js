@@ -4,6 +4,7 @@ const Preview = (props) => {
   return (
     <div className="Preview">
       <h2> Preview </h2>
+
       <div dangerouslySetInnerHTML={{ __html: htmlToRender }}></div>
     </div>
   );
