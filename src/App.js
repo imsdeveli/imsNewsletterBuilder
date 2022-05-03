@@ -571,12 +571,16 @@ export default function App() {
   // }
   return (
     <div class="App">
-      <div class="container-fluid ">
-        <div class="row" style={{ "background-color": "#000000" }}>
+      <div
+        class="container-fluid p-4"
+        style={{ "background-color": "#000000" }}
+      >
+        <div class="row">
           {" "}
           <div>
             <img
               src="https://images.squarespace-cdn.com/content/v1/5e53f316f98ebd7769247a4e/1582563554920-AHCM2PZC0D0IHBGXZ3WV/logo1.png"
+              style={{ maxWidth: "200px" }}
               alt=""
             />{" "}
           </div>
@@ -584,7 +588,7 @@ export default function App() {
       </div>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-3">
+          <div class="col-3 p-4">
             <h2>Newsletter Builder</h2>
             <p class="small">
               First select the email template you'd like to use, and then fill
@@ -594,7 +598,7 @@ export default function App() {
             </p>
             <InputForm addData={addData} pullData={pullData} />
           </div>
-          <div class="col-9">
+          <div class="col-9 p-4">
             <Display
               pullData={pullData}
               state={state}
