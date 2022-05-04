@@ -106,9 +106,10 @@ const TCI = (props) => {
 									<tr>
 										<td style="padding:10px; background-color:#ffffff;">
 											<p style="margin-bottom:1em; text-align: center;" align="center"><a
-													href="#SC_1"
+													href="https://www.behindthemarkets-btm.com/3J67C/9B9DM/?source_id=relcont&sub1=tci&sub2=bde_bezosgoldman2&sub3=nl"
 													style="font-weight:bold; text-decoration: underline; color: #FF9933;"
-													target="_blank">Sponsored Content 1</a>&nbsp;<span
+													target="_blank">Jeff Bezos, Goldman Sachs and a Big Pharma Giant Have Already Invested Billions Into This Stock. Get the Rest of the Story Here
+												</a>&nbsp;<span
 													style="color:#000000; font-weight:normal; font-size:10px; line-height:12px;">[ad]</span>
 											</p>
 
@@ -170,7 +171,7 @@ const TCI = (props) => {
 		  		<table role="presentation" style="width:100%; border:none; border-spacing:0; text-align:left; font-family:Arial,sans-serif; font-size:16px; line-height:18pt; color:#363636; background-color: #FFFFFF;" bgcolor="#FFFFFF">			
   				  <tr>
 			  		<td style="padding:10px; background-color:#ffffff;"> 
-					  <p style="margin-bottom:1em;"><a href="https://mmptrack.com/click.track?CID=438693&AFID=357302&ADID=2480954&SID=relcont,tci,soar,nl" style="font-weight:bold; text-decoration: underline; color: #FF9933;" target="_blank">5 Best Tech Stocks That Could Soar in 2022</a></p>
+					  <p style="margin-bottom:1em;"><a href="https://tracking.legacyoffers.com/aff_c?offer_id=276&aff_id=1828&eid=MKT610162&externalchannel=tci-email-relcont&aff_sub=tci-relcont-nl-expertpredicts" style="font-weight:bold; text-decoration: underline; color: #FF9933;" target="_blank">Expert Predicts Major Money Overhaul in 2022</a></p>
 				  
         			  <p style="margin-bottom:1em;"><a href="https://tracking.legacyoffers.com/aff_c?offer_id=286&aff_id=1671&eid=MKT627590&externalchannel=tci-email-relcont&aff_sub=tci-relcont-nl-lift3" style="font-weight:bold; text-decoration: underline; color: #FF9933;" target="_blank">Former Goldman Sachs Exec: "America's problems explained in ONE chart"</a></p>
 						

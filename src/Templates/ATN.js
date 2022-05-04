@@ -115,7 +115,7 @@ const ATN = (props) => {
 							
 									<p style="margin-bottom:1em;"><a href="https://tracking.legacyoffers.com/aff_c?offer_id=286&aff_id=1671&eid=MKT627590&externalchannel=atn-email-relcont&aff_sub=atn-email-relcont-lift5" style="font-weight:bold; text-decoration: underline; color: #196767;" target="_blank">$150 Trillion | Transformation of US | Bezos/Musk</a></p>			
 											
-									<p style="margin-bottom:1em;"><a href="http://trk.stockinvestor.com/click.track?CID=434710&AFID=513204&ADID=2470113&SID=relcont,atn,rw2,nl" style="font-weight:bold; text-decoration: underline; color: #196767;" target="_blank">American Retirees: Watch this Video [Before the Govt. Bans It]</a></p>
+									<p style="margin-bottom:1em;"><a href="https://tracking.legacyoffers.com/aff_c?offer_id=261&aff_id=1671&eid=MKT603628&externalchannel=atn-email-relcont&aff_sub=atn-relcont-nl-lift3" style="font-weight:bold; text-decoration: underline; color: #196767;" target="_blank">Biggest Investing Shift in 400 Years Could Be Days Away</a></p>
 							
 							<p style="margin-bottom:1em;"><a href="https://www.c7bwtrk.com/5KCWZ2/293Z4R/?source_id=relcont&sub1=atn&sub2=revealed&sub3=nl" style="font-weight:bold; text-decoration: underline; color: #196767;" target="_blank">Bezos' NEXT Big Project Revealed! One that could disrupt a $1.32 trillion industry...</a></p>
 							
