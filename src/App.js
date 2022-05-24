@@ -63,13 +63,13 @@ export default function App() {
   const [state, setState] = useState(appData);
   // const [template, setTemplate] = useState(initialTemplate);
 
-  const [ar2, setAr2] = useState({
+  const [ar1, setAr1] = useState({
     input: "",
     URL: "",
     Head: "",
     Bod: ""
   });
-  const [ar1, setAr1] = useState({
+  const [ar2, setAr2] = useState({
     input: "",
     URL: "",
     Head: "",
