@@ -152,12 +152,18 @@ export default function App() {
     // callUpdate();
   };
   const pullData = () => {
-    handleArticle1(state.ar1.input);
-    handleAd1(state.ad1.input);
-    handleArticle2(state.ar2.input);
-    handleAd2(state.ad2.input);
-    handleArticle3(state.ar3.input);
-    handleAd3(state.ad3.input);
+    handleArticle(state.ar1.input, setAr1);
+    handleArticle(state.ar2.input, setAr2);
+    handleArticle(state.ar3.input, setAr3);
+
+    handleAd(state.ad1.input, setAd1);
+    handleAd(state.ad2.input, setAd2);
+    handleAd(state.ad3.input, setAd3);
+
+    // handleArticle2(state.ar2.input);
+    // handleAd2(state.ad2.input);
+    // handleArticle3(state.ar3.input);
+    // handleAd3(state.ad3.input);
   };
 
   const cutBody = (response) => {
@@ -201,7 +207,92 @@ export default function App() {
     return bodString;
   };
 
-  const handleAd1 = (adInput) => {
+  const handleArticle = (ArInput, arNum) => {
+    console.log("Ar3Input", ArInput);
+
+    const theUrl = `${ArInput}`;
+    const theHeaders = { "Access-Control-Allow-Origin": "*" };
+
+    if (
+      theUrl.includes("thecheapinvestor") ||
+      theUrl.includes("activetradernews")
+    ) {
+      axios
+        .get(theUrl, theHeaders)
+        .then((response) => {
+          let $ = cheerio.load(response.data);
+          let body = cutBody(response);
+
+          $(".site-content").each((index, element) => {
+            let url = ArInput;
+            let title = $(element).find(".page-title").text();
+            title = titleCase(title);
+
+            arNum({
+              input: ArInput,
+              URL: url,
+              Head: title,
+              Bod: body
+            });
+            console.log("TheCheapInvestor URL:", url);
+            console.log("TheCheapInvestor title:", title);
+            console.log("TheCheapInvestor body:", body);
+          });
+        })
+        .catch((error) => console.log("error", error));
+    } else if (theUrl.includes("protradingresearch")) {
+      axios
+        .get(theUrl, theHeaders)
+        .then((response) => {
+          let $ = cheerio.load(response.data);
+          let body = cutBodyPTR(response);
+
+          $(".single_post").each((index, element) => {
+            let url = ArInput;
+            let title = $(element).find(".title").text();
+            title = titleCase(title);
+
+            arNum({
+              input: ArInput,
+              URL: url,
+              Head: title,
+              Bod: body
+            });
+            console.log("PTR URL:", url);
+            console.log("PTR title:", title);
+            console.log("PTR body:", body);
+          });
+        })
+        .catch((error) => console.log("error", error));
+    } else if (theUrl.includes("optionstradingreport")) {
+      axios
+        .get(theUrl, theHeaders)
+        .then((response) => {
+          let $ = cheerio.load(response.data);
+          let body = cutBody(response);
+
+          $(".site-content").each((index, element) => {
+            let url = ArInput;
+            let title = $(element).find(".entry-title").text();
+            title = titleCase(title);
+
+            arNum({
+              input: ArInput,
+              URL: url,
+              Head: title,
+              Bod: body
+            });
+            console.log("OTR URL:", url);
+            console.log("OTR title:", title);
+            console.log("OTR body:", body);
+          });
+        })
+        .catch((error) => console.log("error", error));
+    }
+    return;
+  };
+
+  const handleAd = (adInput, adNum) => {
     console.log("ad1Input", adInput);
 
     const input = `<html>${adInput}</html>`;
@@ -226,7 +317,7 @@ export default function App() {
 
       head = titleCase(head);
 
-      setAd1({
+      adNum({
         input: adInput,
         URL: url,
         Head: head,
@@ -240,325 +331,325 @@ export default function App() {
     });
     return;
   };
-  const handleAd2 = (adInput) => {
-    console.log("ad2Input", adInput);
+  // const handleAd2 = (adInput) => {
+  //   console.log("ad2Input", adInput);
 
-    const input = `<html>${adInput}</html>`;
-    let $ = cheerio.load(input);
+  //   const input = `<html>${adInput}</html>`;
+  //   let $ = cheerio.load(input);
 
-    $("html").each((index, element) => {
-      let url = $("a").attr("href");
-      // let body = $("body")[0].children[3].data;
-      let head = $("span").text();
-      let body = $(element).text();
-      let call = $("a").text();
-      body = body.replace(`${head}`, " ");
-      body = body.replace(`${call}`, " ");
-      body = body.trim();
-      body = body.toString();
+  //   $("html").each((index, element) => {
+  //     let url = $("a").attr("href");
+  //     // let body = $("body")[0].children[3].data;
+  //     let head = $("span").text();
+  //     let body = $(element).text();
+  //     let call = $("a").text();
+  //     body = body.replace(`${head}`, " ");
+  //     body = body.replace(`${call}`, " ");
+  //     body = body.trim();
+  //     body = body.toString();
 
-      head = titleCase(head);
+  //     head = titleCase(head);
 
-      setAd2({
-        input: adInput,
-        URL: url,
-        Head: head,
-        Bod: body,
-        Call: call
-      });
-      console.log("Ad2 Head", head);
-      console.log("Ad2 Call", call);
-      console.log("Ad2 Body", body);
-      console.log("Ad2 URL", url);
-    });
-    return;
-  };
+  //     setAd2({
+  //       input: adInput,
+  //       URL: url,
+  //       Head: head,
+  //       Bod: body,
+  //       Call: call
+  //     });
+  //     console.log("Ad2 Head", head);
+  //     console.log("Ad2 Call", call);
+  //     console.log("Ad2 Body", body);
+  //     console.log("Ad2 URL", url);
+  //   });
+  //   return;
+  // };
 
-  const handleAd3 = (adInput) => {
-    console.log("ad3Input", adInput);
+  // const handleAd3 = (adInput) => {
+  //   console.log("ad3Input", adInput);
 
-    const input = `<html>${adInput}</html>`;
-    let $ = cheerio.load(input);
+  //   const input = `<html>${adInput}</html>`;
+  //   let $ = cheerio.load(input);
 
-    $("html").each((index, element) => {
-      let url = $("a").attr("href");
-      // let body = $("body")[0].children[3].data;
-      let head = $("span").text();
-      let body = $(element).text();
-      let call = $("a").text();
-      body = body.replace(`${head}`, " ");
-      body = body.replace(`${call}`, " ");
-      body = body.trim();
-      body = body.toString();
+  //   $("html").each((index, element) => {
+  //     let url = $("a").attr("href");
+  //     // let body = $("body")[0].children[3].data;
+  //     let head = $("span").text();
+  //     let body = $(element).text();
+  //     let call = $("a").text();
+  //     body = body.replace(`${head}`, " ");
+  //     body = body.replace(`${call}`, " ");
+  //     body = body.trim();
+  //     body = body.toString();
 
-      head = titleCase(head);
+  //     head = titleCase(head);
 
-      setAd3({
-        input: adInput,
-        URL: url,
-        Head: head,
-        Bod: body,
-        Call: call
-      });
-      console.log("Ad3 Head", head);
-      console.log("Ad3 Call", call);
-      console.log("Ad3 Body", body);
-      console.log("Ad3 URL", url);
-    });
-    return;
-  };
+  //     setAd3({
+  //       input: adInput,
+  //       URL: url,
+  //       Head: head,
+  //       Bod: body,
+  //       Call: call
+  //     });
+  //     console.log("Ad3 Head", head);
+  //     console.log("Ad3 Call", call);
+  //     console.log("Ad3 Body", body);
+  //     console.log("Ad3 URL", url);
+  //   });
+  //   return;
+  // };
 
-  const handleArticle1 = (ArInput) => {
-    console.log("Ar1Input", ArInput);
+  // const handleArticle1 = (ArInput) => {
+  //   console.log("Ar1Input", ArInput);
 
-    const theUrl = `${ArInput}`;
-    const theHeaders = { "Access-Control-Allow-Origin": "*" };
+  //   const theUrl = `${ArInput}`;
+  //   const theHeaders = { "Access-Control-Allow-Origin": "*" };
 
-    if (
-      theUrl.includes("thecheapinvestor") ||
-      theUrl.includes("activetradernews")
-    ) {
-      axios
-        .get(theUrl, theHeaders)
-        .then((response) => {
-          let $ = cheerio.load(response.data);
-          let body = cutBody(response);
+  //   if (
+  //     theUrl.includes("thecheapinvestor") ||
+  //     theUrl.includes("activetradernews")
+  //   ) {
+  //     axios
+  //       .get(theUrl, theHeaders)
+  //       .then((response) => {
+  //         let $ = cheerio.load(response.data);
+  //         let body = cutBody(response);
 
-          $(".site-content").each((index, element) => {
-            let url = ArInput;
-            let title = $(element).find(".page-title").text();
-            title = titleCase(title);
-            setAr1({
-              input: ArInput,
-              URL: url,
-              Head: title,
-              Bod: body
-            });
-            console.log("TheCheapInvestor URL:", url);
-            console.log("TheCheapInvestor title:", title);
-            console.log("TheCheapInvestor body:", body);
-          });
-        })
-        .catch((error) => console.log("error", error));
-    } else if (theUrl.includes("protradingresearch")) {
-      axios
-        .get(theUrl, theHeaders)
-        .then((response) => {
-          let $ = cheerio.load(response.data);
-          let body = cutBodyPTR(response);
+  //         $(".site-content").each((index, element) => {
+  //           let url = ArInput;
+  //           let title = $(element).find(".page-title").text();
+  //           title = titleCase(title);
+  //           setAr1({
+  //             input: ArInput,
+  //             URL: url,
+  //             Head: title,
+  //             Bod: body
+  //           });
+  //           console.log("TheCheapInvestor URL:", url);
+  //           console.log("TheCheapInvestor title:", title);
+  //           console.log("TheCheapInvestor body:", body);
+  //         });
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   } else if (theUrl.includes("protradingresearch")) {
+  //     axios
+  //       .get(theUrl, theHeaders)
+  //       .then((response) => {
+  //         let $ = cheerio.load(response.data);
+  //         let body = cutBodyPTR(response);
 
-          $(".single_post").each((index, element) => {
-            let url = ArInput;
-            let title = $(element).find(".title").text();
-            title = titleCase(title);
+  //         $(".single_post").each((index, element) => {
+  //           let url = ArInput;
+  //           let title = $(element).find(".title").text();
+  //           title = titleCase(title);
 
-            setAr1({
-              input: ArInput,
-              URL: url,
-              Head: title,
-              Bod: body
-            });
-            console.log("PTR URL:", url);
-            console.log("PTR title:", title);
-            console.log("PTR body:", body);
-          });
-        })
-        .catch((error) => console.log("error", error));
-    } else if (theUrl.includes("optionstradingreport")) {
-      axios
-        .get(theUrl, theHeaders)
-        .then((response) => {
-          let $ = cheerio.load(response.data);
-          let body = cutBody(response);
+  //           setAr1({
+  //             input: ArInput,
+  //             URL: url,
+  //             Head: title,
+  //             Bod: body
+  //           });
+  //           console.log("PTR URL:", url);
+  //           console.log("PTR title:", title);
+  //           console.log("PTR body:", body);
+  //         });
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   } else if (theUrl.includes("optionstradingreport")) {
+  //     axios
+  //       .get(theUrl, theHeaders)
+  //       .then((response) => {
+  //         let $ = cheerio.load(response.data);
+  //         let body = cutBody(response);
 
-          $(".site-content").each((index, element) => {
-            let url = ArInput;
-            let title = $(element).find(".entry-title").text();
-            title = titleCase(title);
+  //         $(".site-content").each((index, element) => {
+  //           let url = ArInput;
+  //           let title = $(element).find(".entry-title").text();
+  //           title = titleCase(title);
 
-            setAr1({
-              input: ArInput,
-              URL: url,
-              Head: title,
-              Bod: body
-            });
-            console.log("OTR URL:", url);
-            console.log("OTR title:", title);
-            console.log("OTR body:", body);
-          });
-        })
-        .catch((error) => console.log("error", error));
-    }
-    return;
-  };
-  const handleArticle2 = (ArInput) => {
-    console.log("Ar2Input", ArInput);
+  //           setAr1({
+  //             input: ArInput,
+  //             URL: url,
+  //             Head: title,
+  //             Bod: body
+  //           });
+  //           console.log("OTR URL:", url);
+  //           console.log("OTR title:", title);
+  //           console.log("OTR body:", body);
+  //         });
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   }
+  //   return;
+  // };
+  // const handleArticle2 = (ArInput) => {
+  //   console.log("Ar2Input", ArInput);
 
-    const theUrl = `${ArInput}`;
-    const theHeaders = { "Access-Control-Allow-Origin": "*" };
+  //   const theUrl = `${ArInput}`;
+  //   const theHeaders = { "Access-Control-Allow-Origin": "*" };
 
-    if (
-      theUrl.includes("thecheapinvestor") ||
-      theUrl.includes("activetradernews")
-    ) {
-      axios
-        .get(theUrl, theHeaders)
-        .then((response) => {
-          let $ = cheerio.load(response.data);
-          let body = cutBody(response);
+  //   if (
+  //     theUrl.includes("thecheapinvestor") ||
+  //     theUrl.includes("activetradernews")
+  //   ) {
+  //     axios
+  //       .get(theUrl, theHeaders)
+  //       .then((response) => {
+  //         let $ = cheerio.load(response.data);
+  //         let body = cutBody(response);
 
-          $(".site-content").each((index, element) => {
-            let url = ArInput;
-            let title = $(element).find(".page-title").text();
-            title = titleCase(title);
+  //         $(".site-content").each((index, element) => {
+  //           let url = ArInput;
+  //           let title = $(element).find(".page-title").text();
+  //           title = titleCase(title);
 
-            setAr2({
-              input: ArInput,
-              URL: url,
-              Head: title,
-              Bod: body
-            });
-            console.log("TheCheapInvestor URL:", url);
-            console.log("TheCheapInvestor title:", title);
-            console.log("TheCheapInvestor body:", body);
-          });
-        })
-        .catch((error) => console.log("error", error));
-    } else if (theUrl.includes("protradingresearch")) {
-      axios
-        .get(theUrl, theHeaders)
-        .then((response) => {
-          let $ = cheerio.load(response.data);
-          let body = cutBodyPTR(response);
+  //           setAr2({
+  //             input: ArInput,
+  //             URL: url,
+  //             Head: title,
+  //             Bod: body
+  //           });
+  //           console.log("TheCheapInvestor URL:", url);
+  //           console.log("TheCheapInvestor title:", title);
+  //           console.log("TheCheapInvestor body:", body);
+  //         });
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   } else if (theUrl.includes("protradingresearch")) {
+  //     axios
+  //       .get(theUrl, theHeaders)
+  //       .then((response) => {
+  //         let $ = cheerio.load(response.data);
+  //         let body = cutBodyPTR(response);
 
-          $(".single_post").each((index, element) => {
-            let url = ArInput;
-            let title = $(element).find(".title").text();
-            title = titleCase(title);
+  //         $(".single_post").each((index, element) => {
+  //           let url = ArInput;
+  //           let title = $(element).find(".title").text();
+  //           title = titleCase(title);
 
-            setAr2({
-              input: ArInput,
-              URL: url,
-              Head: title,
-              Bod: body
-            });
-            console.log("PTR URL:", url);
-            console.log("PTR title:", title);
-            console.log("PTR body:", body);
-          });
-        })
-        .catch((error) => console.log("error", error));
-    } else if (theUrl.includes("optionstradingreport")) {
-      axios
-        .get(theUrl, theHeaders)
-        .then((response) => {
-          let $ = cheerio.load(response.data);
-          let body = cutBody(response);
+  //           setAr2({
+  //             input: ArInput,
+  //             URL: url,
+  //             Head: title,
+  //             Bod: body
+  //           });
+  //           console.log("PTR URL:", url);
+  //           console.log("PTR title:", title);
+  //           console.log("PTR body:", body);
+  //         });
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   } else if (theUrl.includes("optionstradingreport")) {
+  //     axios
+  //       .get(theUrl, theHeaders)
+  //       .then((response) => {
+  //         let $ = cheerio.load(response.data);
+  //         let body = cutBody(response);
 
-          $(".site-content").each((index, element) => {
-            let url = ArInput;
-            let title = $(element).find(".entry-title").text();
-            title = titleCase(title);
+  //         $(".site-content").each((index, element) => {
+  //           let url = ArInput;
+  //           let title = $(element).find(".entry-title").text();
+  //           title = titleCase(title);
 
-            setAr2({
-              input: ArInput,
-              URL: url,
-              Head: title,
-              Bod: body
-            });
-            console.log("OTR URL:", url);
-            console.log("OTR title:", title);
-            console.log("OTR body:", body);
-          });
-        })
-        .catch((error) => console.log("error", error));
-    }
-    return;
-  };
-  const handleArticle3 = (ArInput) => {
-    console.log("Ar3Input", ArInput);
+  //           setAr2({
+  //             input: ArInput,
+  //             URL: url,
+  //             Head: title,
+  //             Bod: body
+  //           });
+  //           console.log("OTR URL:", url);
+  //           console.log("OTR title:", title);
+  //           console.log("OTR body:", body);
+  //         });
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   }
+  //   return;
+  // };
+  // const handleArticle3 = (ArInput) => {
+  //   console.log("Ar3Input", ArInput);
 
-    const theUrl = `${ArInput}`;
-    const theHeaders = { "Access-Control-Allow-Origin": "*" };
+  //   const theUrl = `${ArInput}`;
+  //   const theHeaders = { "Access-Control-Allow-Origin": "*" };
 
-    if (
-      theUrl.includes("thecheapinvestor") ||
-      theUrl.includes("activetradernews")
-    ) {
-      axios
-        .get(theUrl, theHeaders)
-        .then((response) => {
-          let $ = cheerio.load(response.data);
-          let body = cutBody(response);
+  //   if (
+  //     theUrl.includes("thecheapinvestor") ||
+  //     theUrl.includes("activetradernews")
+  //   ) {
+  //     axios
+  //       .get(theUrl, theHeaders)
+  //       .then((response) => {
+  //         let $ = cheerio.load(response.data);
+  //         let body = cutBody(response);
 
-          $(".site-content").each((index, element) => {
-            let url = ArInput;
-            let title = $(element).find(".page-title").text();
-            title = titleCase(title);
+  //         $(".site-content").each((index, element) => {
+  //           let url = ArInput;
+  //           let title = $(element).find(".page-title").text();
+  //           title = titleCase(title);
 
-            setAr3({
-              input: ArInput,
-              URL: url,
-              Head: title,
-              Bod: body
-            });
-            console.log("TheCheapInvestor URL:", url);
-            console.log("TheCheapInvestor title:", title);
-            console.log("TheCheapInvestor body:", body);
-          });
-        })
-        .catch((error) => console.log("error", error));
-    } else if (theUrl.includes("protradingresearch")) {
-      axios
-        .get(theUrl, theHeaders)
-        .then((response) => {
-          let $ = cheerio.load(response.data);
-          let body = cutBodyPTR(response);
+  //           setAr3({
+  //             input: ArInput,
+  //             URL: url,
+  //             Head: title,
+  //             Bod: body
+  //           });
+  //           console.log("TheCheapInvestor URL:", url);
+  //           console.log("TheCheapInvestor title:", title);
+  //           console.log("TheCheapInvestor body:", body);
+  //         });
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   } else if (theUrl.includes("protradingresearch")) {
+  //     axios
+  //       .get(theUrl, theHeaders)
+  //       .then((response) => {
+  //         let $ = cheerio.load(response.data);
+  //         let body = cutBodyPTR(response);
 
-          $(".single_post").each((index, element) => {
-            let url = ArInput;
-            let title = $(element).find(".title").text();
-            title = titleCase(title);
+  //         $(".single_post").each((index, element) => {
+  //           let url = ArInput;
+  //           let title = $(element).find(".title").text();
+  //           title = titleCase(title);
 
-            setAr3({
-              input: ArInput,
-              URL: url,
-              Head: title,
-              Bod: body
-            });
-            console.log("PTR URL:", url);
-            console.log("PTR title:", title);
-            console.log("PTR body:", body);
-          });
-        })
-        .catch((error) => console.log("error", error));
-    } else if (theUrl.includes("optionstradingreport")) {
-      axios
-        .get(theUrl, theHeaders)
-        .then((response) => {
-          let $ = cheerio.load(response.data);
-          let body = cutBody(response);
+  //           setAr3({
+  //             input: ArInput,
+  //             URL: url,
+  //             Head: title,
+  //             Bod: body
+  //           });
+  //           console.log("PTR URL:", url);
+  //           console.log("PTR title:", title);
+  //           console.log("PTR body:", body);
+  //         });
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   } else if (theUrl.includes("optionstradingreport")) {
+  //     axios
+  //       .get(theUrl, theHeaders)
+  //       .then((response) => {
+  //         let $ = cheerio.load(response.data);
+  //         let body = cutBody(response);
 
-          $(".site-content").each((index, element) => {
-            let url = ArInput;
-            let title = $(element).find(".entry-title").text();
-            title = titleCase(title);
+  //         $(".site-content").each((index, element) => {
+  //           let url = ArInput;
+  //           let title = $(element).find(".entry-title").text();
+  //           title = titleCase(title);
 
-            setAr3({
-              input: ArInput,
-              URL: url,
-              Head: title,
-              Bod: body
-            });
-            console.log("OTR URL:", url);
-            console.log("OTR title:", title);
-            console.log("OTR body:", body);
-          });
-        })
-        .catch((error) => console.log("error", error));
-    }
-    return;
-  };
+  //           setAr3({
+  //             input: ArInput,
+  //             URL: url,
+  //             Head: title,
+  //             Bod: body
+  //           });
+  //           console.log("OTR URL:", url);
+  //           console.log("OTR title:", title);
+  //           console.log("OTR body:", body);
+  //         });
+  //       })
+  //       .catch((error) => console.log("error", error));
+  //   }
+  //   return;
+  // };
 
   // function handleCopyClick() {
   //   /* Save value of myText to input variable */
